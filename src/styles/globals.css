@@ -2,3 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.head_text {
+  @apply py-6 text-5xl font-extrabold text-white sm:text-6xl; 
+}
+
+.blue_gradient {
+  @apply bg-gradient-to-r from-sky-500 via-blue-600 to-purple-500 bg-clip-text text-transparent;
+}
+
+.desc {
+  @apply mt-5 text-lg text-slate-200 sm:text-xl md:px-40 px-4;
+}
