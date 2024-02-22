@@ -1,11 +1,12 @@
 import { Ubuntu } from "next/font/google";
 import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
+import Provider from "@/components/Provider";
 
-const ubuntu = Ubuntu({ 
+const ubuntu = Ubuntu({
   weight: ["300", "400", "500", "700"],
   style: ["normal", "italic"],
-  subsets: ["latin"] 
+  subsets: ["latin"],
 });
 
 export const metadata = {
@@ -17,8 +18,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={ubuntu.className}>
-        <Navbar />
-        {children}
+        <Provider>
+          <Navbar />
+          {children}
+        </Provider>
       </body>
     </html>
   );
