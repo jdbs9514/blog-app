@@ -9,10 +9,12 @@ import { signOut, signIn, getProviders } from "next-auth/react";
 const Navbar = () => {
 
   // en esta variable se simula que el ususario esta logeado
-  const isUserLoggedIn = false;
+  const isUserLoggedIn = true;
 
   // con este hook estamos alamcenando y modificando el estado de providers
   const [providers, setProviders] = useState(null);
+
+  const [toggleDropdown, setToggleDropdown] = useState(false);
 
   useEffect(() => {
     const setProviders = async () => {
@@ -21,6 +23,7 @@ const Navbar = () => {
     }
     setProviders();
   },[]);
+
   //
 
   return (
@@ -69,6 +72,64 @@ const Navbar = () => {
             </div>
 
         ) : (
+          <>
+            {providers && 
+              object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className="black_btn"
+                >
+                  Sign In
+                </button>
+              )
+              )
+            }
+          </>
+        )}
+      </div>
+
+      {/* Mobile Navigation */}
+
+      <div className="sm:hidden flex relative">
+        {isUserLoggedIn ? (
+          <div className="flex">
+            <Image
+              src={profile}
+              alt="profile"
+              width={50}
+              height={50}
+              className="object-contain rounded-full mb-12 mr-4"
+              onClick={() => setToggleDropdown((prev) => !prev)}
+            />
+            {toggleDropdown && (
+              <div className="dropdown">
+                <Link
+                  href="/profile"
+                  className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}
+                >
+                  My profile
+                </Link>
+                <Link
+                  href="/create-post"
+                  className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}
+                >
+                  Create Post
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => { setToggleDropdown(false); signOut(); }}
+                  className="mt-5 w-full black_btn"
+                >
+                  Sign Out
+                </button>
+              </div>
+            )}
+          </div>
+        ):(
           <>
             {providers && 
               object.values(providers).map((provider) => (
