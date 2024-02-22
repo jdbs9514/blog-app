@@ -1,15 +1,14 @@
 "use client"
 import Link from "next/link";
 import logo from "@/app/assets/logo.png";
-import profile from "@/app/assets/profile.png";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { signOut, signIn, getProviders } from "next-auth/react";
+import { signOut, signIn, getProviders, useSession } from "next-auth/react";
 
 const Navbar = () => {
 
   // en esta variable se simula que el ususario esta logeado
-  const isUserLoggedIn = true;
+  const {data: session} = useSession();
 
   // con este hook estamos alamcenando y modificando el estado de providers
   const [providers, setProviders] = useState(null);
@@ -17,11 +16,11 @@ const Navbar = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   useEffect(() => {
-    const setProviders = async () => {
+    const setUpProviders = async () => {
       const response = await getProviders();
       setProviders(response);
     }
-    setProviders();
+    setUpProviders();
   },[]);
 
   //
@@ -42,7 +41,7 @@ const Navbar = () => {
       {/* Desktop navigation */}
 
       <div className="max-sm:hidden">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           // si el usuarion esta logeado mostrar estos links
           // en caso no este logeado mostrara la otra condicion
           
@@ -62,7 +61,7 @@ const Navbar = () => {
 
               <Link href="/profile">
                 <Image
-                  src={profile}
+                  src={session?.user.image}
                   alt="profile"
                   width={50}
                   height={50}
@@ -74,7 +73,7 @@ const Navbar = () => {
         ) : (
           <>
             {providers && 
-              object.values(providers).map((provider) => (
+              Object.values(providers).map((provider) => (
                 <button
                   type="button"
                   key={provider.name}
@@ -93,10 +92,10 @@ const Navbar = () => {
       {/* Mobile Navigation */}
 
       <div className="sm:hidden flex relative">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex">
             <Image
-              src={profile}
+              src={session?.user.image}
               alt="profile"
               width={50}
               height={50}
@@ -132,7 +131,7 @@ const Navbar = () => {
         ):(
           <>
             {providers && 
-              object.values(providers).map((provider) => (
+              Object.values(providers).map((provider) => (
                 <button
                   type="button"
                   key={provider.name}

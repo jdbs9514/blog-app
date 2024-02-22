@@ -21,7 +21,7 @@
 .black_btn {
   @apply rounded-full border border-zinc-950 bg-zinc-950 py-1.5 px-5 
   text-white transition-all hover:bg-white hover:text-black text-center 
-  text-sm flex items-center justify-center;
+  text-sm flex items-center justify-center mr-4;
 }
 
 .outline_btn {
