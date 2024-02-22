@@ -13,3 +13,19 @@
 .desc {
   @apply mt-5 text-lg text-slate-200 sm:text-xl md:px-40 px-4;
 }
+
+.logo_text {
+  @apply max-sm:hidden font-semibold text-lg text-white tracking-wide;
+}
+
+.black_btn {
+  @apply rounded-full border border-zinc-950 bg-zinc-950 py-1.5 px-5 
+  text-white transition-all hover:bg-white hover:text-black text-center 
+  text-sm flex items-center justify-center;
+}
+
+.outline_btn {
+  @apply rounded-full border border-white bg-white py-1.5 px-5 text-black 
+  transition-all hover:bg-black hover:text-white text-center text-sm flex items-center 
+  justify-center;
+}
