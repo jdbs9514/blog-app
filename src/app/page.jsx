@@ -1,3 +1,4 @@
+import Feed from "@/components/Feed"
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <p className="desc text-center">
         opiniON is a platform where you can share your theories about your favorite animes and discover what other people think about them.
       </p>
+      <Feed />
     </section>
   )
 }
