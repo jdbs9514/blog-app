@@ -7,7 +7,11 @@ import copy from "@/app/assets/copy.png";
 import tick from "@/app/assets/tick.png";
 
 const PostCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
+
+  const { data: session } = useSession();
+  const pathName = usePathname();
   const [copied, setCopied] = useState("");
+  const router = useRouter();
 
   // con esta funcion podemas copiar el texto del post para pegar en cualquier lugar
   const handleCopy = () => {
@@ -50,6 +54,22 @@ const PostCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       >
         {post.tag}
       </p>
+      {session?.user.id === post.creator._id && pathName === "/profile" && (
+        <div className="mt-5 flex justify-center gap-4 border-t border-gray-100 pt-3">
+          <p 
+            className="text-sm green_gradient cursor-pointer"
+            onClick={handleEdit}
+          >
+            Edit
+          </p>
+          <p 
+            className="text-sm orange_gradient cursor-pointer"
+            onClick={handleDelete}
+          >
+            Delete
+          </p>
+        </div>
+      )}
     </div>
   );
 };
