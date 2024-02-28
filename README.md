@@ -31,6 +31,6 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-[Blog-App](https://blog-7v037r4mq-josue-david-benavides-salinas-projects.vercel.app/) 
+[Blog-App](https://blog-ok7eyv58k-josue-david-benavides-salinas-projects.vercel.app) 
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
