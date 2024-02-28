@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Form from "@/components/Form";
 
@@ -21,15 +21,15 @@ const EditPost = () => {
         post: data.post,
         tag: data.tag,
       });
-    }
-    if(postId) getPostDetails();
+    };
+    if (postId) getPostDetails();
   }, [postId]);
 
   const updatePost = async (e) => {
     e.preventDefault();
     setSubmitting(true);
 
-    if(!postId) return alert('Post ID not found')
+    if (!postId) return alert("Post ID not found");
 
     try {
       const response = await fetch(`/api/posts/${postId}`, {
@@ -50,13 +50,15 @@ const EditPost = () => {
   };
 
   return (
-    <Form
-      type="Edit"
-      post={post}
-      setPost={setPost}
-      submitting={submitting}
-      handleSubmit={updatePost}
-    />
+    <Suspense>
+      <Form
+        type="Edit"
+        post={post}
+        setPost={setPost}
+        submitting={submitting}
+        handleSubmit={updatePost}
+      />
+    </Suspense>
   );
 };
 
