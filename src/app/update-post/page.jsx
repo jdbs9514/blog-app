@@ -2,6 +2,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Form from "@/components/Form";
+import Loading from "../loading";
 
 const EditPost = () => {
   const router = useRouter();
@@ -50,7 +51,7 @@ const EditPost = () => {
   };
 
   return (
-    <Suspense>
+    <Suspense fallback={<Loading />}>
       <Form
         type="Edit"
         post={post}
